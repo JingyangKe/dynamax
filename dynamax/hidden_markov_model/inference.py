@@ -120,6 +120,8 @@ def hmm_filter(
         filtered posterior distribution
 
     """
+    if log_likelihoods.ndim == 3:
+        log_likelihoods = log_likelihoods[:, :, 0]
     num_timesteps, num_states = log_likelihoods.shape
 
     def _step(carry, t):
@@ -168,6 +170,8 @@ def hmm_backward_filter(
         marginal log likelihood and backward messages.
 
     """
+    if log_likelihoods.ndim == 3:
+        log_likelihoods = log_likelihoods[:, :, 0]
     num_timesteps, num_states = log_likelihoods.shape
 
     def _step(carry, t):
